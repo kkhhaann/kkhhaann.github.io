@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>BPM Calculator</title>
+  <style type="text/css">
+    td, th { padding: 8px; }
+  </style>
+</head>
+<body>
+  <input type="number" id="bpmValue" value="120.0" />
+  <button type=="button" onclick="calculate()">Calculate</button>
+  <table id="msTable">
+    <thead>
+      <tr>
+        <th>Notes</th>
+        <th>Milliseconds</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</body>
+<script type="text/javascript">
+  function calculate() {
+    let bpmValue = document.getElementById('bpmValue').value;
+    let ms = 1000.0 * bpmValue / 60.0
+
+    let tbody = document.createElement('tbody');
+    let values = [1.0, 2.0, 4.0, 8.0, 16.0, 24.0, 32.0, 64.0];
+
+    values.forEach((value) => {
+      let row = tbody.insertRow();
+      row.insertCell(0).textContent = '1 / ' + value;
+      row.insertCell(1).textContent = (ms / value).toFixed(2);
+    });
+
+    let table = document.getElementById('msTable');
+    table.replaceChild(tbody, table.tBodies[0]);
+  }
+
+  calculate();
+</script>
+</html>
